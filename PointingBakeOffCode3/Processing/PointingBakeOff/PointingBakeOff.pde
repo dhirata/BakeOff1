@@ -135,16 +135,24 @@ void drawButton(int i)
 {
   Rectangle bounds = getButtonLocation(i);
 
-  if (trials.get(trialNum) == i) // see if current button is the target
+  if (trials.get(trialNum) == i) {// see if current button is the target
     fill(0, 255, 255); // if so, fill cyan
-  else if (trialNum + 1 < trials.size() && trials.get(trialNum + 1) == i) //Next button color maroon
+    textAlign(CENTER);
+    text("CLICK", bounds.x + bounds.width/2, bounds.y);
+  }
+  else if (trialNum + 1 < trials.size() && trials.get(trialNum + 1) == i) { //Next button color maroon
     fill(128, 0, 0); 
-  else
+    textAlign(CENTER);
+    text("NEXT", bounds.x + bounds.width/2, bounds.y);
+  }
+  else {
     fill(200); // if not, fill gray
-
+    textAlign(CENTER);
+    text(i, bounds.x + bounds.width/2, bounds.y);
+  }
+  
   rect(bounds.x, bounds.y, bounds.width, bounds.height); //draw button
-  textAlign(CENTER);
-  text(i, bounds.x + bounds.width/2, bounds.y);
+  
 }
 
 void mouseMoved()
