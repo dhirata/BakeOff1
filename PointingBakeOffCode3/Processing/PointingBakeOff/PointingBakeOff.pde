@@ -20,8 +20,12 @@ Robot robot; //initalized in setup
 
 int numRepeats = 1; //sets the number of times each button repeats in the test
 
+PFont f;
+
 void setup()
 {
+  f = createFont("Arial",16,true); 
+
   size(700, 700); // set the size of the window
   //noCursor(); //hides the system cursor if you want
   noStroke(); //turn off all strokes, we're just using fills here (can change this if you want)
@@ -139,6 +143,8 @@ void drawButton(int i)
     fill(200); // if not, fill gray
 
   rect(bounds.x, bounds.y, bounds.width, bounds.height); //draw button
+  textAlign(CENTER);
+  text(i, bounds.x + bounds.width/2, bounds.y);
 }
 
 void mouseMoved()
