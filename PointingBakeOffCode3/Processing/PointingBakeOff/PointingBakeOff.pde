@@ -147,11 +147,13 @@ void drawButton(int i)
     textAlign(CENTER);
     text("CLICK", bounds.x + bounds.width/2, bounds.y);
   }
-  //else if (trialNum + 1 < trials.size() && trials.get(trialNum + 1) == i) { //Next button color maroon
-  //  fill(128, 0, 0); 
-  //  textAlign(CENTER);
-  //  text("NEXT", bounds.x + bounds.width/2, bounds.y);
-  //}
+  else if (trialNum + 1 < trials.size() && trials.get(trialNum + 1) == i) { //Next button color maroon
+   //fill(128, 0, 0); 
+   textAlign(CENTER);
+   fill(0, 255, 255);
+   text("NEXT", bounds.x + bounds.width/2, bounds.y);
+   fill(200);
+  }
   else {
     fill(200); // if not, fill gray
     textAlign(CENTER);
