@@ -4,6 +4,10 @@ import java.awt.Robot;
 import java.util.ArrayList;
 import java.util.Collections;
 import processing.core.PApplet;
+import ddf.minim.*;
+
+AudioPlayer player;
+Minim minim;//audio context
 
 //when in doubt, consult the Processsing reference: https://processing.org/reference/
 
@@ -25,6 +29,9 @@ PFont f;
 void setup()
 {
   f = createFont("Arial",16,true); 
+  minim = new Minim(this);
+  player = minim.loadFile("Rymdreglage-8-bit-trip.mp3", 2048);
+  player.play();
 
   size(700, 700); // set the size of the window
   //noCursor(); //hides the system cursor if you want
@@ -119,7 +126,7 @@ void mousePressed() // test to see if hit was in target!
   trialNum++; //Increment trial number
 
   //in this example code, we move the mouse back to the middle
-  robot.mouseMove(width/2, (height)/2); //on click, move cursor to roughly center of window!
+  //robot.mouseMove(width/2, (height)/2); //on click, move cursor to roughly center of window!
 }  
 
 //probably shouldn't have to edit this method
@@ -140,11 +147,11 @@ void drawButton(int i)
     textAlign(CENTER);
     text("CLICK", bounds.x + bounds.width/2, bounds.y);
   }
-  else if (trialNum + 1 < trials.size() && trials.get(trialNum + 1) == i) { //Next button color maroon
-    fill(128, 0, 0); 
-    textAlign(CENTER);
-    text("NEXT", bounds.x + bounds.width/2, bounds.y);
-  }
+  //else if (trialNum + 1 < trials.size() && trials.get(trialNum + 1) == i) { //Next button color maroon
+  //  fill(128, 0, 0); 
+  //  textAlign(CENTER);
+  //  text("NEXT", bounds.x + bounds.width/2, bounds.y);
+  //}
   else {
     fill(200); // if not, fill gray
     textAlign(CENTER);
