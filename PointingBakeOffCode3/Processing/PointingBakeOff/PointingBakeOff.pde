@@ -68,7 +68,6 @@ void setup()
 void draw()
 {
   background(0); //set background to black
-
   if (trialNum >= trials.size()) //check to see if test is over
   {
     fill(255); //set fill color to white
@@ -117,7 +116,8 @@ void mousePressed() // test to see if hit was in target!
     println("Total time taken: " + (finishTime-startTime) / 1000f + " sec");
     println("Average time for each button: " + ((finishTime-startTime) / 1000f)/(float)(hits+misses) + " sec");
   }
-
+  prevX = curX;
+  prevY = curY;
   Rectangle bounds = getButtonLocation(trials.get(trialNum));
 
  //check to see if mouse cursor is inside button 
@@ -187,7 +187,9 @@ void drawNextLine() {
 }
 
 void drawPrevLine() {
-  
+  stroke(0, 255, 255, 200);
+  line(curX, curY, prevX, prevY);
+  stroke(200);
 }
 
 void mouseMoved()
