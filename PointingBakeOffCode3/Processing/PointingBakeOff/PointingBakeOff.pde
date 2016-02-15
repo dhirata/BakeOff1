@@ -26,7 +26,7 @@ int numRepeats = 1; //sets the number of times each button repeats in the test
 PFont f;
 AudioPlayer player;
 Minim minim;//audio context
-int toX, toY, fromX, fromY;
+int nextX, nextY, prevX, prevY, curX, curY;
 
 void setup()
 {
@@ -85,8 +85,15 @@ void draw()
   fill(255); //set fill color to white
   text((trialNum + 1) + " of " + trials.size(), 40, 20); //display what trial the user is on
 
-  for (int i = 0; i < 16; i++)// for all button
+  for (int i = 0; i < 16; i++) { // for all button
     drawButton(i); //draw button
+    if(trialNum != 0) {
+      drawPrevLine();
+    }
+    if(trialNum != trials.size()) {
+      drawNextLine();
+    }
+  }
 
   fill(255, 0, 0, 200); // set fill color to translucent red
   ellipse(mouseX, mouseY, 20, 20); //draw user cursor as a circle with a diameter of 20
@@ -148,6 +155,8 @@ void drawButton(int i)
     fill(0, 255, 255); // if so, fill cyan
     textAlign(CENTER);
     text("CLICK", bounds.x + bounds.width/2, bounds.y);
+    curX = bounds.x + bounds.width/2;
+    curY = bounds.y + bounds.width /2;
   }
   else if (trialNum + 1 < trials.size() && trials.get(trialNum + 1) == i) { //Next button color maroon
    //fill(128, 0, 0); 
@@ -157,6 +166,9 @@ void drawButton(int i)
    strokeWeight(4);
    text("NEXT", bounds.x + bounds.width/2, bounds.y);
    fill(200);
+   nextX = bounds.x + bounds.width /2;
+   nextY = bounds.y + bounds.width /2;
+
   }
   else {
     fill(200); // if not, fill gray
@@ -167,6 +179,14 @@ void drawButton(int i)
   rect(bounds.x, bounds.y, bounds.width, bounds.height); //draw button
   stroke(200);
   strokeWeight(1);
+  
+}
+
+void drawNextLine() {
+  line(curX, curY, nextX, nextY);
+}
+
+void drawPrevLine() {
   
 }
 
