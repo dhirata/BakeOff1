@@ -6,8 +6,7 @@ import java.util.Collections;
 import processing.core.PApplet;
 import ddf.minim.*;
 
-AudioPlayer player;
-Minim minim;//audio context
+
 
 //when in doubt, consult the Processsing reference: https://processing.org/reference/
 
@@ -25,6 +24,9 @@ Robot robot; //initalized in setup
 int numRepeats = 1; //sets the number of times each button repeats in the test
 
 PFont f;
+AudioPlayer player;
+Minim minim;//audio context
+int toX, toY, fromX, fromY;
 
 void setup()
 {
@@ -151,6 +153,8 @@ void drawButton(int i)
    //fill(128, 0, 0); 
    textAlign(CENTER);
    fill(0, 255, 255);
+   stroke(0, 255, 255, 200);
+   strokeWeight(4);
    text("NEXT", bounds.x + bounds.width/2, bounds.y);
    fill(200);
   }
@@ -161,6 +165,8 @@ void drawButton(int i)
   }
   
   rect(bounds.x, bounds.y, bounds.width, bounds.height); //draw button
+  stroke(200);
+  strokeWeight(1);
   
 }
 
