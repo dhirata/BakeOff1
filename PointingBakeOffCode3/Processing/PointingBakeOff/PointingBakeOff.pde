@@ -188,8 +188,10 @@ void drawNextLine() {
 
 void drawPrevLine() {
   stroke(0, 255, 255, 200);
+  strokeWeight(4);
   line(curX, curY, prevX, prevY);
   stroke(200);
+  strokeWeight(1);
 }
 
 void mouseMoved()
