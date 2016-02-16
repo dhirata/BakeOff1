@@ -176,7 +176,12 @@ void drawButton(int i)
     text(i, bounds.x + bounds.width/2, bounds.y);
   }
   
-  rect(bounds.x, bounds.y, bounds.width, bounds.height); //draw button
+  if((abs(bounds.x - mouseX) <= bounds.width / 2 || abs(bounds.x + bounds.width - mouseX) <= bounds.width / 2) 
+    && (abs(bounds.y - mouseY) <= bounds.width / 2 || abs(bounds.y + bounds.width - mouseY) <= bounds.width / 2)) {
+      rect(bounds.x - buttonSize/2, bounds.y - buttonSize/2, bounds.width + buttonSize, bounds.height + buttonSize);
+   }
+  else
+    rect(bounds.x, bounds.y, bounds.width, bounds.height); //draw button
   stroke(200);
   strokeWeight(1);
   
