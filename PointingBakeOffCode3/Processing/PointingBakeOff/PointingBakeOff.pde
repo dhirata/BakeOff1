@@ -121,7 +121,8 @@ void mousePressed() // test to see if hit was in target!
   Rectangle bounds = getButtonLocation(trials.get(trialNum));
 
  //check to see if mouse cursor is inside button 
-  if ((mouseX > bounds.x && mouseX < bounds.x + bounds.width) && (mouseY > bounds.y && mouseY < bounds.y + bounds.height)) // test to see if hit was within bounds
+  if ((mouseX > bounds.x - buttonSize/2 && mouseX < bounds.x + bounds.width + buttonSize/2) 
+    && (mouseY > bounds.y - buttonSize/2 && mouseY < bounds.y + bounds.height + buttonSize/2)) // test to see if hit was within bounds
   {
     System.out.println("HIT! " + trialNum + " " + (millis() - startTime)); // success
     hits++; 
@@ -178,7 +179,11 @@ void drawButton(int i)
   
   if((abs(bounds.x - mouseX) <= bounds.width / 2 || abs(bounds.x + bounds.width - mouseX) <= bounds.width / 2) 
     && (abs(bounds.y - mouseY) <= bounds.width / 2 || abs(bounds.y + bounds.width - mouseY) <= bounds.width / 2)) {
-      rect(bounds.x - buttonSize/2, bounds.y - buttonSize/2, bounds.width + buttonSize, bounds.height + buttonSize);
+      bounds.x = bounds.x - buttonSize/2;
+      bounds.y = bounds.y - buttonSize/2;
+      bounds.width = bounds.width + buttonSize;
+      bounds.height =  bounds.height + buttonSize;
+      rect(bounds.x, bounds.y, bounds.width, bounds.height);
    }
   else
     rect(bounds.x, bounds.y, bounds.width, bounds.height); //draw button
