@@ -6,6 +6,13 @@ import java.util.Collections;
 import processing.core.PApplet;
 import ddf.minim.*;
 
+//************* CHANGE YOUR NUMBER HERE *****************
+// according to the table
+// Angee = 1
+// Shailja = 2
+// Tina = 3 
+int userId = 4; 
+//********************************************************
 
 
 //when in doubt, consult the Processsing reference: https://processing.org/reference/
@@ -21,12 +28,14 @@ int hits = 0; //number of successful clicks
 int misses = 0; //number of missed clicks
 Robot robot; //initalized in setup 
 
-int numRepeats = 1; //sets the number of times each button repeats in the test
+int numRepeats = 10; //sets the number of times each button repeats in the test
 
 PFont f;
 AudioPlayer player;
 Minim minim;//audio context
 int nextX, nextY, prevX, prevY, curX, curY;
+int tempTime;
+boolean flag = false;
 
 void setup()
 {
@@ -59,7 +68,7 @@ void setup()
       trials.add(i);
 
   Collections.shuffle(trials); // randomize the order of the buttons
-  System.out.println("trial order: " + trials);
+  //System.out.println("trial order: " + trials);
   
   frame.setLocation(0,0); // put window in top left corner of screen (doesn't always work)
 }
@@ -110,11 +119,11 @@ void mousePressed() // test to see if hit was in target!
   {
     finishTime = millis();
     //write to terminal some output:
-    println("Hits: " + hits);
-    println("Misses: " + misses);
-    println("Accuracy: " + (float)hits*100f/(float)(hits+misses) +"%");
-    println("Total time taken: " + (finishTime-startTime) / 1000f + " sec");
-    println("Average time for each button: " + ((finishTime-startTime) / 1000f)/(float)(hits+misses) + " sec");
+    //println("Hits: " + hits);
+    //println("Misses: " + misses);
+    //println("Accuracy: " + (float)hits*100f/(float)(hits+misses) +"%");
+    //println("Total time taken: " + (finishTime-startTime) / 1000f + " sec");
+    //println("Average time for each button: " + ((finishTime-startTime) / 1000f)/(float)(hits+misses) + " sec");
   }
   prevX = curX;
   prevY = curY;
@@ -124,15 +133,23 @@ void mousePressed() // test to see if hit was in target!
   if ((mouseX > bounds.x - buttonSize/2 && mouseX < bounds.x + bounds.width + buttonSize/2) 
     && (mouseY > bounds.y - buttonSize/2 && mouseY < bounds.y + bounds.height + buttonSize/2)) // test to see if hit was within bounds
   {
-    System.out.println("HIT! " + trialNum + " " + (millis() - startTime)); // success
+    //if(trialNum > 16) {
+    //  //System.out.println(trialNum + "," + userId + "," + prevX + "," + prevY + "," + curX + "," + curY + "," + 80 + "," + (millis() - tempTime) + "," + ); // FOR CSV 
+    //}
     hits++; 
+    flag = true;
   } 
   else
   {
-    System.out.println("MISSED! " + trialNum + " " + (millis() - startTime)); // fail
+    //System.out.println("MISSED! " + trialNum + " " + (millis() - startTime)); // fail
     misses++;
+    flag = false;
   }
-
+  if(trialNum > 16) {
+      double seconds = (double)(millis() - tempTime) / 1000;
+      System.out.println(trialNum + "," + userId + "," + prevX + "," + prevY + "," + curX + "," + curY + "," + 80 + "," + seconds + "," + flag); // FOR CSV
+  }
+  tempTime = millis();
   trialNum++; //Increment trial number
 
   //in this example code, we move the mouse back to the middle
