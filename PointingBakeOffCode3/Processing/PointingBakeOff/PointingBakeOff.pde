@@ -34,6 +34,7 @@ PFont f;
 AudioPlayer player;
 Minim minim;//audio context
 int nextX, nextY, prevX, prevY, curX, curY;
+int tempY, tempX;
 int tempTime;
 boolean flag = false;
 
@@ -125,6 +126,8 @@ void mousePressed() // test to see if hit was in target!
     //println("Total time taken: " + (finishTime-startTime) / 1000f + " sec");
     //println("Average time for each button: " + ((finishTime-startTime) / 1000f)/(float)(hits+misses) + " sec");
   }
+  tempX = prevX;
+  tempY = prevY;
   prevX = curX;
   prevY = curY;
   Rectangle bounds = getButtonLocation(trials.get(trialNum));
@@ -147,7 +150,7 @@ void mousePressed() // test to see if hit was in target!
   }
   if(trialNum > 16) {
       double seconds = (double)(millis() - tempTime) / 1000;
-      System.out.println(trialNum + "," + userId + "," + prevX + "," + prevY + "," + curX + "," + curY + "," + 80 + "," + seconds + "," + flag); // FOR CSV
+      System.out.println(trialNum + "," + userId + "," + tempX + "," + tempY + "," + curX + "," + curY + "," + 80 + "," + seconds + "," + flag); // FOR CSV
   }
   tempTime = millis();
   trialNum++; //Increment trial number
